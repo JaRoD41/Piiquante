@@ -11,9 +11,9 @@ exports.createSauce = (req, res) => {
 		userId: req.auth.userId,
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 	});
-	//console.log("file :", req.file);
-	//console.log("params :", req.params);
-	//console.log("sauce body :", req.body);
+	console.log("file :", req.file);
+	console.log("params :", req.params);
+	console.log("sauce body :", req.body);
 	sauce
 		.save()
 		.then(() => res.status(201).json({ message: "Sauce enregistrée !" }))
