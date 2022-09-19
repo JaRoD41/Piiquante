@@ -1,5 +1,6 @@
 "use strict";
 
+const fs = require('fs');
 const Sauce = require('../models/Sauce');
 
 exports.createSauce = (req, res) => {
@@ -22,14 +23,25 @@ exports.createSauce = (req, res) => {
 
 exports.modifySauce = (req, res) => {
 	Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-		.then(() => res.status(200).json({ message: "Sauce modifiée !" }))
+		.then(() => res.status(200).json({ message: "Sauce modified !" }))
 		.catch((error) => res.status(400).json({ error }));
 };
 
 exports.deleteSauce = (req, res) => {
-	Sauce.deleteOne({ _id: req.params.id })
-		.then(() => res.status(200).json({ message: "Sauce supprimée !" }))
-		.catch((error) => res.status(400).json({ error }));
+	Sauce.findOne({ _id: req.params.id })
+	.then(sauce => {
+		if (sauce.userId != req.auth.userId) {
+			res.status(401).json({message: process.env.FORBIDDEN });
+		} else {
+			const filename = sauce.imageUrl.split('/images/')[1];
+			fs.unlink(`images/${filename}`, () => {
+				Sauce.deleteOne({ _id: req.params.id })
+				.then(() => res.status(200).json({ message: "Sauce deleted!" }))
+				.catch(error => res.status(401).json({ error }));
+			})
+		}
+	})
+	.catch((error) => res.status(500).json({ error }));
 };
 
 exports.getOneSauce = (req, res) => {
@@ -44,7 +56,7 @@ exports.getAllSauces = (req, res) => {
 		.catch((error) => res.status(400).json({ error }));
 };
 
-/* backup du controleur createSauce avant modif pour multer
+/* backup du controleur createSauce et deleteSauce avant modif pour multer
 
 exports.createSauce = (req, res) => {
 	delete req.body._id;
@@ -57,6 +69,12 @@ exports.createSauce = (req, res) => {
 	sauce
 		.save()
 		.then(() => res.status(201).json({ message: "Sauce enregistrée !" }))
+		.catch((error) => res.status(400).json({ error }));
+};
+
+exports.deleteSauce = (req, res) => {
+	Sauce.deleteOne({ _id: req.params.id })
+		.then(() => res.status(200).json({ message: "Sauce supprimée !" }))
 		.catch((error) => res.status(400).json({ error }));
 };
 
