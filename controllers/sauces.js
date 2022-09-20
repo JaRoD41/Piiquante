@@ -72,10 +72,4 @@ exports.createSauce = (req, res) => {
 		.catch((error) => res.status(400).json({ error }));
 };
 
-exports.deleteSauce = (req, res) => {
-	Sauce.deleteOne({ _id: req.params.id })
-		.then(() => res.status(200).json({ message: "Sauce supprimée !" }))
-		.catch((error) => res.status(400).json({ error }));
-};
-
 */
