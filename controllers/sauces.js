@@ -2,9 +2,11 @@
 
 const fs = require('fs');
 const Sauce = require('../models/Sauce');
+const { login } = require('./user');
 
 exports.createSauce = (req, res) => {
 	const sauceObject = JSON.parse(req.body.sauce);
+	console.log("objet sauce :", sauceObject);
 	delete sauceObject._id;
 	delete sauceObject._userId;
 	const sauce = new Sauce({
@@ -12,9 +14,6 @@ exports.createSauce = (req, res) => {
 		userId: req.auth.userId,
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 	});
-	console.log("file :", req.file);
-	console.log("params :", req.params);
-	console.log("sauce body :", req.body);
 	sauce
 		.save()
 		.then(() => res.status(201).json({ message: "Sauce enregistrée !" }))

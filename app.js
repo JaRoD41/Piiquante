@@ -20,6 +20,7 @@ mongoose
 	.then(() => console.log(process.env.MONGO_SUCCESS))
 	.catch(() => console.log(process.env.MONGO_FAIL));
 
+//mise en place de headers spécifiques afin d'éviter les erreurs CORS
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
