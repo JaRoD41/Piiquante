@@ -8,7 +8,7 @@ const sauceSchema = mongoose.Schema({
 	manufacturer: { type: String, required: true },
 	description: { type: String, required: true },
 	mainPepper: { type: String, required: true },
-	imageUrl: { type: String/*, required: true */},
+	imageUrl: { type: String, required: true }, // mettre required en com si pb
 	heat: { type: Number, required: true },
 	likes: { type: Number, default: 0 },
 	dislikes: { type: Number, default: 0 },
