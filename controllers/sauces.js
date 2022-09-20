@@ -8,10 +8,10 @@ exports.createSauce = (req, res) => {
 	const sauceObject = JSON.parse(req.body.sauce);
 	console.log("objet sauce :", sauceObject);
 	delete sauceObject._id;
-	delete sauceObject._userId;
+	//delete sauceObject._userId;
 	const sauce = new Sauce({
 		...sauceObject,
-		userId: req.auth.userId,
+		//userId: req.auth.userId,
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 	});
 	sauce
@@ -29,7 +29,7 @@ exports.modifySauce = (req, res) => {
 exports.deleteSauce = (req, res) => {
 	Sauce.findOne({ _id: req.params.id })
 	.then(sauce => {
-		if (sauce.userId != req.auth.userId) {
+		if (!sauce.userId/*!= req.auth.userId*/) {
 			res.status(401).json({message: process.env.FORBIDDEN });
 		} else {
 			const filename = sauce.imageUrl.split('/images/')[1];
@@ -50,6 +50,7 @@ exports.getOneSauce = (req, res) => {
 };
 
 exports.getAllSauces = (req, res) => {
+	console.log(req);
 	Sauce.find()
 		.then((sauces) => res.status(200).json(sauces)) //on affiche le tableau des sauces renvoyé par MongoDB
 		.catch((error) => res.status(400).json({ error }));
