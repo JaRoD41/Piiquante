@@ -11,15 +11,15 @@ const multer = require("../middlewares/multer-config");
 
 //mise en place des routeurs pour chaque type de route avec ajout du middleware d'authentification
 
-router.post('/', multer, saucesCtrl.createSauce);
+router.post('/', auth, multer, saucesCtrl.createSauce);
 
-router.put('/:id', multer, saucesCtrl.modifySauce);
+router.put('/:id', auth, multer, saucesCtrl.modifySauce);
 
-router.delete('/:id', saucesCtrl.deleteSauce);
+router.delete('/:id', auth, saucesCtrl.deleteSauce);
 
-router.get('/:id', saucesCtrl.getOneSauce);
+router.get('/:id', auth, saucesCtrl.getOneSauce);
 
-router.get('/', saucesCtrl.getAllSauces);
+router.get('/', auth, saucesCtrl.getAllSauces);
 
 //export du routeur
 
