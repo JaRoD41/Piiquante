@@ -32,7 +32,7 @@ exports.deleteSauce = (req, res) => {
 	Sauce.findOne({ _id: req.params.id })
 	.then(sauce => {
 		if (sauce.userId != req.auth.userId) {
-			//à mettre en com si pb !sauce.userId
+			//à mettre en com et si pb !sauce.userId
 			res.status(401).json({ message: process.env.FORBIDDEN });
 		} else {
 			const filename = sauce.imageUrl.split('/images/')[1];
