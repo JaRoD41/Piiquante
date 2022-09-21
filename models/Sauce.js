@@ -8,12 +8,13 @@ const sauceSchema = mongoose.Schema({
 	manufacturer: { type: String, required: true },
 	description: { type: String, required: true },
 	mainPepper: { type: String, required: true },
-	imageUrl: { type: String, required: true }, // mettre required en com si pb
+	imageUrl: { type: String, required: true }, 
 	heat: { type: Number, required: true },
+	//likes et dislikes
 	likes: { type: Number, default: 0 },
 	dislikes: { type: Number, default: 0 },
 	usersLiked: { type: [String] },
-	usersDisliked: { type: [String] },
+	usersDisliked: { type: [String] }
 });
 
 //export du modèle de sauce
