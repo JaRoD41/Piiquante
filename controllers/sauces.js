@@ -6,7 +6,6 @@ const { login } = require('./user');
 
 exports.createSauce = (req, res) => {
 	const sauceObject = JSON.parse(req.body.sauce);
-	console.log("objet sauce :", sauceObject);
 	delete sauceObject._id;
 	delete sauceObject._userId; //à mettre en com si pb
 	const sauce = new Sauce({
@@ -53,7 +52,6 @@ exports.getOneSauce = (req, res) => {
 };
 
 exports.getAllSauces = (req, res) => {
-	console.log(req);
 	Sauce.find()
 		.then((sauces) => res.status(200).json(sauces)) //on affiche le tableau des sauces renvoyé par MongoDB
 		.catch((error) => res.status(400).json({ error }));
