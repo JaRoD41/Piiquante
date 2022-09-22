@@ -56,21 +56,3 @@ exports.getAllSauces = (req, res) => {
 		.then((sauces) => res.status(200).json(sauces)) //on affiche le tableau des sauces renvoyé par MongoDB
 		.catch((error) => res.status(400).json({ error }));
 };
-
-/* backup du controleur createSauce et deleteSauce avant modif pour multer
-
-exports.createSauce = (req, res) => {
-	delete req.body._id;
-	const sauce = new Sauce({
-		...req.body
-	});
-  console.log("file :", req.file);
-  console.log("params :", req.params);
-  console.log("sauce :", req.body);
-	sauce
-		.save()
-		.then(() => res.status(201).json({ message: "Sauce enregistrée !" }))
-		.catch((error) => res.status(400).json({ error }));
-};
-
-*/

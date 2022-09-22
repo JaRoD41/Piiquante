@@ -14,7 +14,6 @@ exports.likeDislikeSauce = (req, res) => {
 						!sauce.usersLiked.includes(req.body.userId) &&
 						req.body.like === 1
 					) {
-						console.log("front like=1 et userId non présent dans usersLiked");
 
 						//Mise à jour de la base MongoDB
 
@@ -37,7 +36,6 @@ exports.likeDislikeSauce = (req, res) => {
 						!sauce.usersDisliked.includes(req.body.userId) &&
 						req.body.like === -1
 					) {
-						console.log("front like = -1 et userId absent de usersDisliked");
 
 						//Mise à jour de la base MongoDB
 
@@ -59,7 +57,6 @@ exports.likeDislikeSauce = (req, res) => {
 					//si le tableau usersLiked contient ce userId ET que le likes vaut 0
 
 					if (sauce.usersLiked.includes(req.body.userId)) {
-						console.log("front like=0 et userId présent dans usersLiked");
 
 						//Mise à jour de la base MongoDB
 
@@ -77,9 +74,6 @@ exports.likeDislikeSauce = (req, res) => {
 					//si le tableau usersLiked contient ce userId ET que le dislikes vaut 0
 
 					if (sauce.usersDisliked.includes(req.body.userId)) {
-						console.log(
-							"front dislike = 0 et userId présent dans usersDisliked"
-						);
 
 						//Mise à jour de la base MongoDB
 
