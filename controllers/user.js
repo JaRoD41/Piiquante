@@ -4,14 +4,14 @@ const jwt = require('jsonwebtoken');
 const User = require("../models/User");
 
 exports.signup = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10)
+  bcrypt.hash(req.body.password, 10) //hash du password par bcrypt
   .then(hash => {
-    const user = new User({
+    const user = new User({ //modèle de l'objet user
       email: req.body.email,
       password: hash
     });
     user
-			.save()
+			.save() //sauvegarde du l'user dans MongoDB
 			.then(() =>
 				res.status(201).json({ message: process.env.CREATE_USER_SUCCESS })
 			)
@@ -26,7 +26,7 @@ exports.login = (req, res, next) => {
       if (user === null) {
         res.status(401).json({ message: process.env.LOGIN_ERROR });
       } else {
-        bcrypt
+        bcrypt //vérification de la validité du hash
 					.compare(req.body.password, user.password)
 					.then(valid => {
             if (!valid) {
