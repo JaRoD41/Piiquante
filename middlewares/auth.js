@@ -1,7 +1,8 @@
 "use strict";
+//création du middleware d'authentification
 
 const jwt = require('jsonwebtoken');
-const KEY = process.env.JWT_KEY;
+const KEY = process.env.JWT_KEY; //mise en place de la clé d'encryption/décryption du token 
 
 module.exports = (req, res, next) => {
   try {
