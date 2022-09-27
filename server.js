@@ -1,5 +1,6 @@
 "use strict";
 
+//création du serveur Node qui va écouter et traiter les requêtes 
 const http = require('http');
 const app = require("./app");
 const dotenv = require('dotenv');

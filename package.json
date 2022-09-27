@@ -1,7 +1,7 @@
 {
   "name": "@JaRoD41/P6-Piiquante",
   "version": "0.3.1",
-  "description": "Backend Server Piiquante",
+  "description": "Piiquante Backend Server",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
