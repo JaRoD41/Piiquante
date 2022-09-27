@@ -1,5 +1,5 @@
 {
-	"name": "@JaRoD41/P6-Piiquante",
+	"name": "p6_piiquante",
 	"version": "0.3.1",
 	"description": "Piiquante Backend Server",
 	"main": "server.js",
