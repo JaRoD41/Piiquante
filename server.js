@@ -4,6 +4,8 @@
 const http = require('http');
 const app = require("./app");
 const dotenv = require('dotenv');
+const fs = require('fs');
+const path = require('path');
 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
@@ -39,6 +41,14 @@ const errorHandler = (error) => {
       throw error;
   }
 };
+
+//création du dossier images/ qui va servir aux sauces
+fs.mkdir(path.join(__dirname, "images"), {recursive: true}, (error) => {
+  if (error) {
+    return console.log(error);
+  }
+  console.log('Directory created successfully !');
+});
 
 const server = http.createServer(app);
 
